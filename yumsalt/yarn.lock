@@ -6801,6 +6801,11 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
+linked-controls@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/linked-controls/-/linked-controls-1.0.4.tgz#aa85d481ae8f1395fc8d77620a4900766a6d0b09"
+  integrity sha512-NeIlXPs3yj3BxIYPRAaI9v6iu3/X0TJyi9vfFB+Q44fDuK3EbyoAeTaEyi8gFk2SdVQ6FQ36N5JJ4UfQqBPdZw==
+
 load-json-file@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-2.0.0.tgz#7947e42149af80d696cbf797bcaabcfe1fe29ca8"
