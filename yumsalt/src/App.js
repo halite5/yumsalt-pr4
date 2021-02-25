@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import './App.css';
 import TabList from './comp/TabList';
 import PageBody from './comp/PageBody';
+
 import TextPage from './pages/TextPage';
+import ImagePage from './pages/ImagePage';
+import VideoPage from './pages/VideoPage';
+import TablePage from './pages/TablePage';
+import EmailPage from './pages/EmailPage';
 
 export class App extends Component {
   constructor() {
@@ -14,16 +19,20 @@ export class App extends Component {
         body: <TextPage />
       },
       {
-        name: 'image'
+        name: 'image',
+        body: <ImagePage />
       },
       {
-        name: 'video'
+        name: 'video',
+        body: <VideoPage />
       },
       {
-        name: 'table'
+        name: 'table',
+        body: <TablePage />
       },
       {
-        name: 'email'
+        name: 'email',
+        body: <EmailPage />
       }
     ]
 
