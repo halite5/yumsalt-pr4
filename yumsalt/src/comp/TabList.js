@@ -4,7 +4,7 @@ import Tab from './Tab';
 
 function TabList({ tabInfo, activeTab, onSelected }) {
     let tabs = tabInfo.map(t =>
-        <Tab id={t.name} name={t.name} isActive={activeTab == t.name} onSelected={() => onSelected(t.name)} />
+        <Tab key={t.name} name={t.name} isActive={activeTab === t.name} onSelected={() => onSelected(t.name)} />
     )
 
     return (
