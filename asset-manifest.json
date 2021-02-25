@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/yumsalt-react/static/css/main.5a9b6f8c.chunk.css",
+    "main.js": "/yumsalt-react/static/js/main.49858bb1.chunk.js",
+    "main.js.map": "/yumsalt-react/static/js/main.49858bb1.chunk.js.map",
+    "runtime-main.js": "/yumsalt-react/static/js/runtime-main.ef265ea5.js",
+    "runtime-main.js.map": "/yumsalt-react/static/js/runtime-main.ef265ea5.js.map",
+    "static/js/2.e2a6b496.chunk.js": "/yumsalt-react/static/js/2.e2a6b496.chunk.js",
+    "static/js/2.e2a6b496.chunk.js.map": "/yumsalt-react/static/js/2.e2a6b496.chunk.js.map",
+    "static/js/3.4a71b5a2.chunk.js": "/yumsalt-react/static/js/3.4a71b5a2.chunk.js",
+    "static/js/3.4a71b5a2.chunk.js.map": "/yumsalt-react/static/js/3.4a71b5a2.chunk.js.map",
+    "index.html": "/yumsalt-react/index.html",
+    "static/css/main.5a9b6f8c.chunk.css.map": "/yumsalt-react/static/css/main.5a9b6f8c.chunk.css.map",
+    "static/js/2.e2a6b496.chunk.js.LICENSE.txt": "/yumsalt-react/static/js/2.e2a6b496.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/yumsalt-react/static/media/eb-garamond-v14-latin-regular.fcc87875.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ef265ea5.js",
+    "static/js/2.e2a6b496.chunk.js",
+    "static/css/main.5a9b6f8c.chunk.css",
+    "static/js/main.49858bb1.chunk.js"
+  ]
+}
