@@ -6,11 +6,11 @@ function MediaHost({ mediaUrl, onDismiss }) {
         onDismiss()
     }
 
-    let isImage = !mediaUrl.endsWith('.mp4')
+    let isImage = !(mediaUrl.endsWith('.mp4') || mediaUrl.endsWith('.m4v'))
 
     let host = isImage
         ? <img src={mediaUrl} className="super-center" />
-        : <video src={mediaUrl} className="super-center" />
+        : <video src={mediaUrl} className="super-center" controls />
 
     return (
         <div>

@@ -1,19 +1,23 @@
 import React from 'react'
 
-export default function VideoPage() {
+export default function VideoPage({ previewer }) {
+    let viClicked = (e) => {
+        previewer(e.target.src)
+    }
+
     return (
         <section>
             <div className="video-grid">
                 <figure className="media-grid-item">
-                    <video src={process.env.PUBLIC_URL + "./vid/chocknife.m4v"} controls></video>
+                    <video src={process.env.PUBLIC_URL + "./vid/chocknife.m4v"} onClick={viClicked}></video>
                     <figcaption>chocolate knife</figcaption>
                 </figure>
                 <figure className="media-grid-item">
-                    <video src={process.env.PUBLIC_URL + "./vid/candyknife.m4v"} controls></video>
+                    <video src={process.env.PUBLIC_URL + "./vid/candyknife.m4v"} onClick={viClicked}></video>
                     <figcaption>candy knife</figcaption>
                 </figure>
                 <figure className="media-grid-item">
-                    <video src={process.env.PUBLIC_URL + "./vid/seawaterknife.m4v"} controls></video>
+                    <video src={process.env.PUBLIC_URL + "./vid/seawaterknife.m4v"} onClick={viClicked}></video>
                     <figcaption>seawater knife</figcaption>
                 </figure>
             </div>
