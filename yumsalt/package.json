@@ -18,7 +18,7 @@
   },
   "scripts": {
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build -u 'halite5 <76928365+halite5@users.noreply.github.com>' --no-push",
+    // "deploy": "gh-pages -d build -u 'halite5 <76928365+halite5@users.noreply.github.com>' --no-push",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
