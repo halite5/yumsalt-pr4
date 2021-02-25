@@ -1,0 +1,17 @@
+nav {
+    margin: 32px 0;
+}
+
+nav > a {
+    padding: 8px;
+    background-color: #e1d1b4;
+    margin: 0 2px;
+}
+
+nav > a:hover {
+    background-color: #7c6a79;
+}
+
+nav > a.active {
+    background-color: #b7adaa;
+}

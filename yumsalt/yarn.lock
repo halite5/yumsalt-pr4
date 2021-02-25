@@ -10842,6 +10842,11 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+valuelink@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/valuelink/-/valuelink-2.0.9.tgz#cb2649adabd3699fe89e28d20c50221993733153"
+  integrity sha512-pY6VM7UZOeNHREjWcfq1fSC7oxZUV/K5wxyb5sB4FH+DN7T8PegxsGd3Vn1n23gNY6sunnBjrObLs4MllKbKVQ==
+
 vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
