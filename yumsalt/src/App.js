@@ -41,8 +41,17 @@ export class App extends Component {
       tabInfo: tabs,
       activeTab: tabs[0].name,
       previewUrl: '',
-      previewOpen: false
+      previewOpen: false,
+      bttVisible: false
     }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
   }
 
   onTabSelected = (tabName) => {
@@ -72,8 +81,27 @@ export class App extends Component {
     return this.state.tabInfo.find(x => x.name === name)
   }
 
+  onScroll = () => {
+    var root = document.documentElement
+    var maxScroll = root.scrollHeight - root.clientHeight
+
+    var scroll = root.scrollTop
+
+    var bttVis = false
+    if (scroll / maxScroll > 0.25) {
+      bttVis = true
+    }
+
+    this.setState({
+      bttVisible: bttVis
+    })
+  }
+
   render() {
     let page = this.getTab(this.state.activeTab)
+
+    let btt = (<aside class="btt">
+      <a href="#" onClick={() => document.documentElement.scrollTop = 0}>top</a></aside>)
 
     return (
       <div className="App">
@@ -81,6 +109,9 @@ export class App extends Component {
         <TabList tabInfo={this.state.tabInfo} activeTab={this.state.activeTab} onSelected={this.onTabSelected} />
         <PageBody content={page.body} previewer={this.openPreviewer} />
         <Previewer mediaUrl={this.state.previewUrl} isOpen={this.state.previewOpen} onDismiss={this.closePreviewer} />
+        { this.state.bttVisible &&
+          btt
+        }
       </div>
     )
   }
