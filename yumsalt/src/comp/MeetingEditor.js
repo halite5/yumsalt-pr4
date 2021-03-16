@@ -7,12 +7,15 @@ export class MeetingEditor extends LinkedComponent {
     constructor(props) {
         super(props)
 
-        this.DATE_FORMAT = "MM-DD-YYYY hh:mm a"
+        this.DATE_FORMAT_FRIENDLY = "MM-DD-YYYY hh:mm a"
+        this.DATE_FORMAT_ICE = "MM-DD-YY[T]HH:mm"
 
         // make sure mode is valid
         if (!props.mode || props.mode.length == 0) {
             console.error('invalid meeting editor mode:', props.mode)
         }
+        
+        // console.log('meeting editor mode:', props.mode)
 
         let form_data = {
             name: '',
@@ -26,7 +29,10 @@ export class MeetingEditor extends LinkedComponent {
 
         // if MODE=EDIT...
         if (props.mode == 'edit') {
-            let conv_init_datetime = moment(props.init_datetime).format(this.DATE_FORMAT)
+            let init_datetime_moment = moment(props.init_datetime, this.DATE_FORMAT_ICE)
+            let conv_init_datetime = init_datetime_moment.format(this.DATE_FORMAT_FRIENDLY)
+            // console.log('conv datetime:', conv_init_datetime, 'init datetime:', init_datetime_moment)
+
             form_data.name = props.init_name
             form_data.datetime = conv_init_datetime
             form_data.link = props.init_link
@@ -52,7 +58,7 @@ export class MeetingEditor extends LinkedComponent {
         }
         // 2. date: valid, and greater than current
         let datetime = this.state.datetime
-        let parsed_date = moment(datetime, this.DATE_FORMAT)
+        let parsed_date = moment(datetime, this.DATE_FORMAT_FRIENDLY)
         console.log('parsed date:', parsed_date)
 
         // ensure correct parsing
@@ -69,7 +75,7 @@ export class MeetingEditor extends LinkedComponent {
         }
 
         // convert date to correct format (2021-03-05T09:00)
-        let export_date = parsed_date.format('MM-DD-YY[T]HH:mm')
+        let export_date = parsed_date.format(this.DATE_FORMAT_ICE)
         console.log('export date', export_date)
 
         // 3. link: must contain 'zoom'
