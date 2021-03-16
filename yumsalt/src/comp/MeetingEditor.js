@@ -7,8 +7,8 @@ export class MeetingEditor extends LinkedComponent {
     constructor(props) {
         super(props)
 
-        this.DATE_FORMAT_FRIENDLY = "MM-DD-YYYY hh:mm a"
-        this.DATE_FORMAT_ICE = "MM-DD-YY[T]HH:mm"
+        this.DATE_FORMAT_FRIENDLY = "MM/DD/YYYY hh:mm a"
+        this.DATE_FORMAT_ICE = "YYYY-MM-DD[T]HH:mm"
 
         // make sure mode is valid
         if (!props.mode || props.mode.length == 0) {
@@ -31,7 +31,7 @@ export class MeetingEditor extends LinkedComponent {
         if (props.mode == 'edit') {
             let init_datetime_moment = moment(props.init_datetime, this.DATE_FORMAT_ICE)
             let conv_init_datetime = init_datetime_moment.format(this.DATE_FORMAT_FRIENDLY)
-            // console.log('conv datetime:', conv_init_datetime, 'init datetime:', init_datetime_moment)
+            console.log('conv datetime:', conv_init_datetime, 'init datetime:', init_datetime_moment)
 
             form_data.name = props.init_name
             form_data.datetime = conv_init_datetime
