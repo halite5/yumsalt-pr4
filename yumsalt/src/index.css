@@ -119,3 +119,27 @@ a.btn {
 a.btn:hover {
     background-color: #7c6a79;
 }
+
+button {
+    /* reset button */
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    -webkit-appearance: none;
+}
+
+button.btn {
+    padding: 4px 4px;
+    background-color: #e1d1b4;
+    margin: 0 2px;
+}
+
+button.btn:hover {
+    background-color: #7c6a79;   
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { LinkedComponent } from 'valuelink';
 import { Input } from 'linked-controls';
+import Button from '../comp/Button'
 import moment from 'moment'
 
 export class MeetingEditor extends LinkedComponent {
@@ -121,7 +122,7 @@ export class MeetingEditor extends LinkedComponent {
                         <label>important</label><br />
                         <Input type="checkbox" $checked={state$.important} /><br />
                     </fieldset>
-                    <input type="submit" value="save meeting" />
+                    <button className="btn" type="submit">save meeting</button>
                     <span id="validation-status">{this.state.status}</span>
                 </form>
             </div>
