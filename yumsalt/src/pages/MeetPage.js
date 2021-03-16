@@ -94,6 +94,10 @@ export class MeetPage extends Component {
         let meetings_html = this.state.meetings.map(x =>
             <Meeting key={x.id} id={x.id} title={x.name} datetime={x.datetime} link={x.link} important={x.important} onDelete={this.onDeleteMeeting.bind(this)} />)
 
+        if (this.state.meetings.length == 0) {
+            meetings_html = <p>no available meetings (create one?)</p>
+        }
+
         let schedule_html = (
             <div>
                 <Button text="create meeting" click={this.showCreateMeeting.bind(this)} />
