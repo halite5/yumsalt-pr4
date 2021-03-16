@@ -9,6 +9,7 @@ export class MeetPage extends Component {
         this.state = {
             meetings: [
                 {
+                    id: 0,
                     name: "Pi Celebration Meeting",
                     datetime: "3/14/2021 15:14:15",
                     link: "https://zoom.us/j/31456926535",
@@ -16,6 +17,26 @@ export class MeetPage extends Component {
                 }
             ]
         }
+    }
+
+    async componentDidMount() {
+        // fetch data
+        const resp = await fetch('http://localhost:5000/tasks')
+        const raw_meetings = await resp.json()
+        // console.log('fetched meetings:', raw_meetings)
+        const meetings = raw_meetings.map(x => {
+            return {
+                id: x.id,
+                name: x.title,
+                datetime: x.day,
+                link: x.textInfor,
+                important: x.important
+            }
+        })
+        // console.log('parsed meetings:', meetings)
+        this.setState({
+            meetings: meetings
+        })
     }
 
     createMeeting() {

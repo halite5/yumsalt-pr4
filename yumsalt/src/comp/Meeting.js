@@ -12,7 +12,7 @@ export class Meeting extends Component {
     }
 
     render() {
-        let status_block = {}
+        let status_block = <></>
         if (this.props.important) {
             status_block = (<p>IMPORTANT</p>)
         }
