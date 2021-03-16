@@ -105,7 +105,7 @@ export class App extends Component {
   render() {
     let page = this.getTab(this.state.activeTab)
 
-    let btt = (<aside class="btt">
+    let btt = (<aside className="btt">
       <a href="#" onClick={() => document.documentElement.scrollTop = 0}>top</a></aside>)
 
     return (

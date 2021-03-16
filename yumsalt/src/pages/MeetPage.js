@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Meeting from '../comp/Meeting'
+import NewMeeting from '../comp/NewMeeting'
 import Button from '../comp/Button'
 
 export class MeetPage extends Component {
@@ -15,11 +16,16 @@ export class MeetPage extends Component {
                     link: "https://zoom.us/j/31456926535",
                     important: true
                 }
-            ]
+            ],
+            creating_new: false
         }
     }
 
     async componentDidMount() {
+        await this.refetchMeetings()
+    }
+
+    async refetchMeetings() {
         // fetch data
         const resp = await fetch('http://localhost:5000/tasks')
         const raw_meetings = await resp.json()
@@ -39,28 +45,80 @@ export class MeetPage extends Component {
         })
     }
 
-    createMeeting() {
-        alert('not implemented')
+    showCreateMeeting() {
+        this.setState({
+            creating_new: true
+        })
     }
 
-    onDeleteMeeting(meeting) {
-        console.log('trying to delete meeting:', meeting)
+    showFullSchedule() {
+        this.setState({
+            creating_new: false
+        })
+    }
+
+    async onDeleteMeeting(meeting) {
+        // first confirm
+        if (!window.confirm(`are you sure you want to delete: ${meeting.props.title}?`))
+            return
+
+        // find meeting ID
+        let mt_id = meeting.props.id
+        console.log('trying to delete meeting:', meeting, 'ID:', mt_id)
+
+        await fetch(`http://localhost:5000/tasks/${mt_id}`, {
+            method: 'delete'
+        })
+
+        await this.refetchMeetings()
+    }
+
+    async onSaveMeeting(meeting_data) {
+        console.log('trying to save meeting:', meeting_data)
+
+        // post it to server
+        await fetch('http://localhost:5000/tasks', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(meeting_data)
+        })
+
+        this.showFullSchedule()
+
+        // now refresh
+        await this.refetchMeetings()
     }
 
     render() {
 
         let meetings_html = this.state.meetings.map(x =>
-            <Meeting key={x.name} title={x.name} datetime={x.datetime} link={x.link} important={x.important} onDelete={this.onDeleteMeeting} />)
+            <Meeting key={x.id} id={x.id} title={x.name} datetime={x.datetime} link={x.link} important={x.important} onDelete={this.onDeleteMeeting.bind(this)} />)
+
+        let schedule_html = (
+            <div>
+                <Button text="create meeting" click={this.showCreateMeeting.bind(this)} />
+
+                <h2>meeting schedule</h2>
+                <div className="meeting-list">
+                    {meetings_html}
+                </div>
+            </div>
+        )
+
+        let newmeeting_html = (
+            <div>
+                <Button text="full schedule" click={this.showFullSchedule.bind(this)} />
+
+                <NewMeeting onSave={this.onSaveMeeting.bind(this)} />
+            </div>
+        )
+
+        let section_body = this.state.creating_new ? newmeeting_html : schedule_html
 
         return (
             <section>
                 <h1>zoom meeting manager</h1>
-                <Button text="create meeting" click={this.createMeeting} />
-
-                <h2>meetings</h2>
-                <div className="meeting-list">
-                    {meetings_html}
-                </div>
+                {section_body}
             </section>
         )
     }
