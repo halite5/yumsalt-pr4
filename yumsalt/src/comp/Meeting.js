@@ -8,12 +8,16 @@ export class Meeting extends Component {
     }
 
     render() {
+        let container_class = "meeting"
+
         let status_block = <></>
         if (this.props.important) {
             status_block = (<p>IMPORTANT</p>)
+            container_class += ' meeting-important'
         }
+
         return (
-            <div className="meeting">
+            <div className={container_class}>
                 <h3>{this.props.title}</h3>
                 <div className="meeting-controls">
                     <Button text="edit" click={() => { this.props.onEdit(this) }} />

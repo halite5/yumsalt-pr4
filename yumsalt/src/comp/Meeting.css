@@ -4,6 +4,10 @@
     border: 2px dotted gray;
 }
 
+.meeting-important {   
+    border: 2px dotted #bf5b3b;
+}
+
 .meeting > h3 {
     margin: 0 auto;
 }
