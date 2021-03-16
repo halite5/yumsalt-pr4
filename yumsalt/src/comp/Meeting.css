@@ -16,6 +16,11 @@
     margin-right: 4px;
 }
 
+.meeting-status {
+    color: #bf5b3b;
+    font-weight: bold;
+}
+
 .meeting-details {
     padding-left: 8px;
     border-left: 2px solid gray;
