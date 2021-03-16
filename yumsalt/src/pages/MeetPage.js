@@ -8,15 +8,7 @@ export class MeetPage extends Component {
         super()
 
         this.state = {
-            meetings: [
-                {
-                    id: 0,
-                    name: "Pi Celebration Meeting",
-                    datetime: "3/14/2021 15:14:15",
-                    link: "https://zoom.us/j/31456926535",
-                    important: true
-                }
-            ],
+            meetings: [ ],
             is_editing_meeting: false,
             editing_meeting_id: -1,
         }
