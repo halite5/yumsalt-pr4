@@ -27,6 +27,10 @@ export class MeetPage extends Component {
     }
 
     render() {
+
+        let meetings_html = this.state.meetings.map(x =>
+            <Meeting key={x.name} title={x.name} datetime={x.datetime} link={x.link} important={x.important} onDelete={this.onDeleteMeeting} />)
+
         return (
             <section>
                 <h1>zoom meeting manager</h1>
@@ -34,7 +38,7 @@ export class MeetPage extends Component {
 
                 <h2>meetings</h2>
                 <div className="meeting-list">
-                    <Meeting title="Pi Celebration Meeting" datetime="3/14/2021 15:14:15" link="https://zoom.us/j/31456926535" important={true} onDelete={this.onDeleteMeeting} />
+                    {meetings_html}
                 </div>
             </section>
         )
