@@ -1,0 +1,22 @@
+.meeting {
+    margin-top: 8px;
+    padding: 8px 10px;
+    border: 2px dotted gray;
+}
+
+.meeting > h3 {
+    margin: 0 auto;
+}
+
+.meeting-controls {
+    margin-top: 8px;
+}
+
+.meeting-controls > a {
+    margin-right: 4px;
+}
+
+.meeting-details {
+    padding-left: 8px;
+    border-left: 2px solid gray;
+}

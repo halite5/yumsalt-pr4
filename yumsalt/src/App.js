@@ -9,6 +9,7 @@ import ImagePage from './pages/ImagePage';
 import VideoPage from './pages/VideoPage';
 import TablePage from './pages/TablePage';
 import EmailPage from './pages/EmailPage';
+import MeetPage from './pages/MeetPage';
 
 export class App extends Component {
   constructor() {
@@ -34,6 +35,10 @@ export class App extends Component {
       {
         name: 'email',
         body: <EmailPage />
+      },
+      {
+        name: 'meet',
+        body: <MeetPage />
       }
     ]
 
