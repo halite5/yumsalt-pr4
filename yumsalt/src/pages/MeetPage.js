@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Meeting from '../comp/Meeting'
-import NewMeeting from '../comp/NewMeeting'
+import MeetingEditor from '../comp/MeetingEditor'
 import Button from '../comp/Button'
 
 export class MeetPage extends Component {
@@ -20,6 +20,10 @@ export class MeetPage extends Component {
             is_editing_meeting: false,
             editing_meeting_id: -1,
         }
+    }
+
+    findMeetingById(id) {
+        return this.state.meetings.findIndex(x => x.id == id)
     }
 
     async componentDidMount() {
@@ -87,15 +91,24 @@ export class MeetPage extends Component {
         await this.refetchMeetings()
     }
 
-    async onSaveMeeting(meeting_data) {
-        console.log('trying to save meeting:', meeting_data)
+    async onSaveMeeting(meeting_data, create_new) {
+        console.log('trying to save meeting:', meeting_data, 'create:', create_new)
 
-        // post it to server
-        await fetch('http://localhost:5000/tasks', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(meeting_data)
-        })
+        if (create_new) {
+            // POST new meeting to server
+            await fetch('http://localhost:5000/tasks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(meeting_data)
+            })
+        } else {
+            // PATCH an existing meeting
+            await fetch(`http://localhost:5000/tasks/${meeting_data.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(meeting_data)
+            })
+        }
 
         this.showFullSchedule()
 
@@ -123,15 +136,25 @@ export class MeetPage extends Component {
             </div>
         )
 
-        let newmeeting_html = (
+        let editmeeting_form = null
+
+        if (this.state.is_editing_meeting && this.state.editing_meeting_id >= 0) {
+            const meeting_ix = this.findMeetingById(this.state.editing_meeting_id)
+            const meeting = this.state.meetings[meeting_ix]
+            editmeeting_form = <MeetingEditor mode="edit" onSave={this.onSaveMeeting.bind(this)} init_name={meeting.name} init_datetime={meeting.datetime} init_link={meeting.link} init_important={meeting.important} init_id={meeting.id} />
+        } else {
+            editmeeting_form = <MeetingEditor mode="new" onSave={this.onSaveMeeting.bind(this)} />
+        }
+
+        let editmeeting_html = (
             <div>
                 <Button text="full schedule" click={this.showFullSchedule.bind(this)} />
 
-                <NewMeeting onSave={this.onSaveMeeting.bind(this)} />
+                {editmeeting_form}
             </div>
         )
 
-        let section_body = this.state.is_editing_meeting ? newmeeting_html : schedule_html
+        let section_body = this.state.is_editing_meeting ? editmeeting_html : schedule_html
 
         return (
             <section>

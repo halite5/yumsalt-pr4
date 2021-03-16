@@ -3,16 +3,39 @@ import { LinkedComponent } from 'valuelink';
 import { Input } from 'linked-controls';
 import moment from 'moment'
 
-export class NewMeeting extends LinkedComponent {
+export class MeetingEditor extends LinkedComponent {
     constructor(props) {
         super(props)
 
-        this.state = {
+        this.DATE_FORMAT = "MM-DD-YYYY hh:mm a"
+
+        // make sure mode is valid
+        if (!props.mode || props.mode.length == 0) {
+            console.error('invalid meeting editor mode:', props.mode)
+        }
+
+        let form_data = {
             name: '',
             datetime: '',
             link: '',
             important: false,
+            id: 0,
+        }
 
+        // if MODE=NEW...
+
+        // if MODE=EDIT...
+        if (props.mode == 'edit') {
+            let conv_init_datetime = moment(props.init_datetime).format(this.DATE_FORMAT)
+            form_data.name = props.init_name
+            form_data.datetime = conv_init_datetime
+            form_data.link = props.init_link
+            form_data.important = props.init_important
+            form_data.id = props.init_id
+        }
+
+        this.state = {
+            ...form_data,
             status: ''
         }
     }
@@ -29,7 +52,7 @@ export class NewMeeting extends LinkedComponent {
         }
         // 2. date: valid, and greater than current
         let datetime = this.state.datetime
-        let parsed_date = moment(datetime, "MM-DD-YYYY hh:mm a")
+        let parsed_date = moment(datetime, this.DATE_FORMAT)
         console.log('parsed date:', parsed_date)
 
         // ensure correct parsing
@@ -45,8 +68,9 @@ export class NewMeeting extends LinkedComponent {
             err_msg = 'date/time must be in future'
         }
 
-        let iso_date = parsed_date.toDate().toISOString()
-        console.log('iso date', iso_date)
+        // convert date to correct format (2021-03-05T09:00)
+        let export_date = parsed_date.format('MM-DD-YY[T]HH:mm')
+        console.log('export date', export_date)
 
         // 3. link: must contain 'zoom'
         let link = this.state.link
@@ -57,12 +81,14 @@ export class NewMeeting extends LinkedComponent {
         let important = this.state.important
 
         if (valid) {
+            let is_creating_new = this.props.mode == 'new'
             this.props.onSave({
                 title: name,
-                day: iso_date,
+                day: export_date,
                 textInfor: link,
                 important: important,
-            })
+                id: this.state.id,
+            }, is_creating_new)
         }
 
         this.setState({
@@ -97,4 +123,4 @@ export class NewMeeting extends LinkedComponent {
     }
 }
 
-export default NewMeeting
+export default MeetingEditor
