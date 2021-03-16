@@ -20,7 +20,7 @@ export default function TextPage() {
                     <input type="radio" id="pinksalt" name="favsalt" value="pink" />
                     <label htmlFor="pinksalt">pink salt</label>
                 </fieldset>
-                <input type="submit" value="submit"  />
+                <button className="btn" type="submit">submit</button>
             </form>
         </section>
     )

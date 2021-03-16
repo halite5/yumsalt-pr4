@@ -43,7 +43,7 @@ export class EmailPage extends LinkedComponent {
             <Input type="text" $value={state$.email} />
                         </label>
                     </fieldset>
-                    <input type="submit" value="submit" />
+                    <button className="btn" type="submit">submit</button>
                     <span id="validation-status">{this.state.status}</span>
                 </form>
             </section>
