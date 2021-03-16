@@ -7,10 +7,6 @@ export class Meeting extends Component {
         super(props)
     }
 
-    editMeeting() {
-        alert('not implemented')
-    }
-
     render() {
         let status_block = <></>
         if (this.props.important) {
@@ -20,7 +16,7 @@ export class Meeting extends Component {
             <div className="meeting">
                 <h3>{this.props.title}</h3>
                 <div className="meeting-controls">
-                    <Button text="edit" click={this.editMeeting} />
+                    <Button text="edit" click={() => { this.props.onEdit(this) }} />
                     <Button text="delete" click={() => { this.props.onDelete(this) }} />
                 </div>
                 <div className="meeting-status">

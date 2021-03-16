@@ -17,7 +17,8 @@ export class MeetPage extends Component {
                     important: true
                 }
             ],
-            creating_new: false
+            is_editing_meeting: false,
+            editing_meeting_id: -1,
         }
     }
 
@@ -47,13 +48,26 @@ export class MeetPage extends Component {
 
     showCreateMeeting() {
         this.setState({
-            creating_new: true
+            is_editing_meeting: true,
+            editing_meeting_id: -1
         })
     }
 
     showFullSchedule() {
         this.setState({
-            creating_new: false
+            is_editing_meeting: false,
+            editing_meeting_id: -1
+        })
+    }
+
+    onEditMeeting(meeting) {
+        // find meeting ID
+        let mt_id = meeting.props.id
+        console.log('trying to edit meeting:', meeting, 'ID:', mt_id)
+
+        this.setState({
+            is_editing_meeting: true,
+            editing_meeting_id: mt_id
         })
     }
 
@@ -92,7 +106,7 @@ export class MeetPage extends Component {
     render() {
 
         let meetings_html = this.state.meetings.map(x =>
-            <Meeting key={x.id} id={x.id} title={x.name} datetime={x.datetime} link={x.link} important={x.important} onDelete={this.onDeleteMeeting.bind(this)} />)
+            <Meeting key={x.id} id={x.id} title={x.name} datetime={x.datetime} link={x.link} important={x.important} onDelete={this.onDeleteMeeting.bind(this)} onEdit={this.onEditMeeting.bind(this)} />)
 
         if (this.state.meetings.length == 0) {
             meetings_html = <p>no available meetings (create one?)</p>
@@ -117,7 +131,7 @@ export class MeetPage extends Component {
             </div>
         )
 
-        let section_body = this.state.creating_new ? newmeeting_html : schedule_html
+        let section_body = this.state.is_editing_meeting ? newmeeting_html : schedule_html
 
         return (
             <section>
