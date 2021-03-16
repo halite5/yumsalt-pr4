@@ -88,6 +88,7 @@ export class MeetingEditor extends LinkedComponent {
         let important = this.state.important
 
         if (valid) {
+            err_msg = 'saving...'
             let is_creating_new = this.props.mode == 'new'
             this.props.onSave({
                 title: name,
